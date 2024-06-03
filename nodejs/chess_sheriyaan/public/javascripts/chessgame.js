@@ -62,11 +62,13 @@ const renderBoard = () => {
                         draggedPiece = pieceElement;
                         sourceSquare = { row: rowIndex, col: squareIndex };
                         e.dataTransfer.setData("text/plain", "");
+                        highlightPossibleMoves(sourceSquare);
                     }
                 });
                 pieceElement.addEventListener("dragend", () => {
                     draggedPiece = null;
                     sourceSquare = null;
+                    removeHighlight();
                 });
                 squareElement.appendChild(pieceElement);
             }
@@ -113,6 +115,27 @@ const getPieceUnicode = (piece) => {
         'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙'
     };
     return pieces[piece] || '';
+};
+
+const highlightPossibleMoves = (source) => {
+    const from = `${String.fromCharCode(97 + source.col)}${8 - source.row}`;
+    const moves = chess.moves({ square: from, verbose: true });
+
+    moves.forEach(move => {
+        const targetSquare = document.querySelector(
+            `[data-row="${8 - parseInt(move.to[1])}"][data-col="${move.to.charCodeAt(0) - 97}"]`
+        );
+        if (targetSquare) {
+            console.log(targetSquare);
+            targetSquare.classList.add('highlight');
+        }
+    });
+};
+
+const removeHighlight = () => {
+    document.querySelectorAll('.highlight').forEach(square => {
+        square.classList.remove('highlight');
+    });
 };
 
 const startTimer = () => {

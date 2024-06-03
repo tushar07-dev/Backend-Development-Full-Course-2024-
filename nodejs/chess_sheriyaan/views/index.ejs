@@ -49,21 +49,25 @@
         .dragging {
             opacity: 0.5;
         }
+        .highlight {
+            background: rgba(126, 255, 126, 0.5);
+            border: 2px solid rgba(126, 255, 126, 0.5);
+        }
     </style>
 </head>
 <body>
     <div class="w-full h-screen flex flex-col items-center justify-center bg-zinc-900">
-        <div class="timers flex justify-between w-96 mb-4">
+        <div class="timers text-white flex justify-between w-96 mb-4">
             <div id="white-timer">5:00</div>
             <div id="black-timer">5:00</div>
         </div>
         <div class="flex">
             <div class="chessboard"></div>
-            <div id="move-history" class="ml-4 overflow-y-scroll h-96"></div>
+            <div id="move-history" class="text-white ml-4 overflow-y-scroll h-96"></div>
         </div>
         <div class="flex mt-4">
-            <button id="undo-button" class="btn">Undo</button>
-            <button id="redo-button" class="btn ml-4">Redo</button>
+            <button id="undo-button" class="btn text-white">Undo</button>
+            <button id="redo-button" class="btn ml-4  text-white">Redo</button>
         </div>
     </div>
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
